@@ -5,18 +5,31 @@ package com.example.dingu.myblogapp;
  */
 
 public class Post {
-    private String Title,Image,Desc;
+    private String Title;
+    private String Image;
+    private String Desc;
+
+
+
+    private String username;
 
     public Post()
     {
 
     }
-    public Post(String title, String desc, String image) {
+    public Post(String title, String desc, String image,String userName) {
         Title = title;
         Desc = desc;
         Image = image;
+        this.username = userName;
+    }
+    public String getUserName() {
+        return username;
     }
 
+    public void setUserName(String userName) {
+        this.username = userName;
+    }
     public String getImage() {
         return Image;
     }

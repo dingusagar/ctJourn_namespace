@@ -28,5 +28,14 @@
             android:id="@+id/post_desc"
             android:text="post desc"
             android:padding="10dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="username"
+            android:id="@+id/post_username"
+            android:padding="10dp"
+            android:textColor="@color/greyColor"
+            android:textSize="12sp" />
+
     </LinearLayout>
 </android.support.v7.widget.CardView>

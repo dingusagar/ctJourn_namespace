@@ -81,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
                 viewHolder.setTitle(model.getTitle());
                 viewHolder.setDesc(model.getDesc());
                 viewHolder.setImage(getApplicationContext(),model.getImage());
+                viewHolder.setUserName(model.getUserName());
             }
         };
         postList.setAdapter(firebaseRecyclerAdapter);
@@ -150,6 +151,12 @@ public class MainActivity extends AppCompatActivity {
         {
             ImageView postImage = (ImageView)mView.findViewById(R.id.post_image);
             Picasso.with(context).load(image).into(postImage);
+        }
+
+        public void setUserName(String userName)
+        {
+            TextView post_username = (TextView)mView.findViewById(R.id.post_username);
+            post_username.setText("posted by "+userName);
         }
     }
 
