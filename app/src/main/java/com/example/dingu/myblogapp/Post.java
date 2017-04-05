@@ -1,0 +1,44 @@
+package com.example.dingu.myblogapp;
+
+/**
+ * Created by dingu on 1/4/17.
+ */
+
+public class Post {
+    private String Title,Image,Desc;
+
+    public Post()
+    {
+
+    }
+    public Post(String title, String desc, String image) {
+        Title = title;
+        Desc = desc;
+        Image = image;
+    }
+
+    public String getImage() {
+        return Image;
+    }
+
+    public void setImage(String image) {
+        Image = image;
+    }
+
+    public String getDesc() {
+        return Desc;
+    }
+
+    public void setDesc(String desc) {
+        Desc = desc;
+    }
+
+    public String getTitle() {
+
+        return Title;
+    }
+
+    public void setTitle(String title) {
+        Title = title;
+    }
+}
