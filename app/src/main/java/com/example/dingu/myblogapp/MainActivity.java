@@ -3,6 +3,7 @@ package com.example.dingu.myblogapp;
 import android.content.Context;
 import android.content.Intent;
 
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
@@ -24,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
     private RecyclerView postList;
     private DatabaseReference myDBRef;
+    private DatabaseReference mDatabaseUsers;
     private FirebaseDatabase firebaseDatabase;
 
     private FirebaseAuth mAuth;
@@ -40,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                if(firebaseAuth.getCurrentUser()==null)
                {
-                   Intent loginIntent = new Intent(MainActivity.this,RegisterActivity.class);
+                   Intent loginIntent = new Intent(MainActivity.this,LoginActivity.class);
                    loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                    startActivity(loginIntent);
                }
@@ -49,6 +52,11 @@ public class MainActivity extends AppCompatActivity {
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         myDBRef = firebaseDatabase.getReference().child("Post");
+        myDBRef.keepSynced(true);
+
+        mDatabaseUsers = FirebaseDatabase.getInstance().getReference().child("Users");
+        mDatabaseUsers.keepSynced(true);
+
         postList = (RecyclerView)findViewById(R.id.post_list);
         postList.setHasFixedSize(true);
         postList.setLayoutManager(new LinearLayoutManager(this));
@@ -89,7 +97,33 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
        if(item.getItemId() == R.id.action_add)
             startActivity(new Intent(MainActivity.this,PostActivity.class));
+        else if(item.getItemId() == R.id.action_log_out)
+       {
+           mAuth.signOut();
+           startActivity(new Intent(MainActivity.this, LoginActivity.class)); //Go back to home page
+           finish();
+       }
         return super.onOptionsItemSelected(item);
+    }
+
+    private Boolean exit = false;
+    @Override
+    public void onBackPressed() {
+        if (exit) {
+            finish(); // finish activity
+        } else {
+            Toast.makeText(this, "Press Back again to Exit.",
+                    Toast.LENGTH_SHORT).show();
+            exit = true;
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    exit = false;
+                }
+            }, 3 * 1000);
+
+        }
+
     }
 
     public static class PostViewHolder extends RecyclerView.ViewHolder{

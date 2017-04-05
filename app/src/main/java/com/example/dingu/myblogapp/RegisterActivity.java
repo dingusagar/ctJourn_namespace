@@ -22,7 +22,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private ProgressDialog progress;
-    private DatabaseReference mdatabaseRef;
+    private DatabaseReference mdatabaseRefUsers;
 
     private EditText nameField;
     private EditText emailField;
@@ -44,7 +44,7 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         mAuth = FirebaseAuth.getInstance();
-        mdatabaseRef = FirebaseDatabase.getInstance().getReference().child("Users");
+        mdatabaseRefUsers = FirebaseDatabase.getInstance().getReference().child("Users");
         progress = new ProgressDialog(this);
 
         nameField = (EditText)findViewById(R.id.name);
@@ -75,7 +75,7 @@ public class RegisterActivity extends AppCompatActivity {
                     if(task.isSuccessful())
                     {
                         String userID = mAuth.getCurrentUser().getUid();
-                        DatabaseReference currentUserDB = mdatabaseRef.child(userID);
+                        DatabaseReference currentUserDB = mdatabaseRefUsers.child(userID);
                         currentUserDB.child("name").setValue(name);
                         currentUserDB.child("userMode").setValue(userMode);
                         currentUserDB.child("image").setValue("default");
