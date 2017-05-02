@@ -218,14 +218,18 @@ public class MainActivity extends AppCompatActivity {
             mDatabaseRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    if(dataSnapshot.child(postKey).hasChild(newAuth.getCurrentUser().getUid()))
-                    {
-                        likeButton.setImageResource(R.mipmap.blue_like);
+                    boolean userLoggedIn ;
+                    if (newAuth.getCurrentUser() != null) {
+                        if(dataSnapshot.child(postKey).hasChild(newAuth.getCurrentUser().getUid()))
+                        {
+                            likeButton.setImageResource(R.mipmap.blue_like);
+                        }
+                        else
+                        {
+                            likeButton.setImageResource(R.mipmap.grey_like);
+                        }
                     }
-                    else
-                    {
-                        likeButton.setImageResource(R.mipmap.grey_like);
-                    }
+
                 }
 
                 @Override

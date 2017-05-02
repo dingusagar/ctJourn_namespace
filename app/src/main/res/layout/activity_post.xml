@@ -52,7 +52,7 @@
         android:layout_margin="4dp"
         android:background="@drawable/input_outline"
         android:padding="8dp"
-        android:inputType="textPersonName"
+        android:inputType="textMultiLine|textPersonName"
         android:hint="Description"
         android:ems="10"
         android:layout_below="@+id/titleText"
