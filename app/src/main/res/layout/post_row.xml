@@ -8,10 +8,10 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <ImageView
+        <VideoView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/post_image"
+            android:layout_height="250dp"
+            android:id="@+id/post_video"
             android:src="@mipmap/add_btn"
             android:scaleType="centerCrop"
             android:adjustViewBounds="true" />
