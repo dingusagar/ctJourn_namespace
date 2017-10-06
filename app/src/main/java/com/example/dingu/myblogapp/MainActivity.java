@@ -17,6 +17,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
@@ -25,7 +26,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.squareup.picasso.Picasso;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
 
                 viewHolder.setTitle(model.getTitle());
                 viewHolder.setDesc(model.getDesc());
-                viewHolder.setImage(getApplicationContext(),model.getImage());
+                viewHolder.setVideo(getApplicationContext(),model.getVideo());
                 viewHolder.setUserName(model.getUserName());
                 viewHolder.setLikeButton(postKey);
 
@@ -201,10 +201,11 @@ public class MainActivity extends AppCompatActivity {
             post_desc.setText(desc);
         }
 
-        public void setImage(Context context,String image)
+        public void setVideo(Context context,String image)
         {
-            ImageView postImage = (ImageView)mView.findViewById(R.id.post_image);
-            Picasso.with(context).load(image).into(postImage);
+            VideoView videoView = (VideoView)mView.findViewById(R.id.post_video);
+
+
         }
 
         public void setUserName(String userName)
